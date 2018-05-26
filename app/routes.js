@@ -21,8 +21,8 @@ module.exports = function(app, passport) {
     // process the login form
     app.post('/login', passport.authenticate('local-login', {
         successRedirect : '/profile', //redirect to secure profile section
-        failureRedirect : '/signup', //redirect back to signup
-        failureFlash : true // allow flash messages
+        failureRedirect : '/login', //redirect back to login
+        failureFlash : true // allow flash messages EDIT
     }));
 
     // =====================================

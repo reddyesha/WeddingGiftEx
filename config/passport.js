@@ -68,7 +68,7 @@ module.exports = function(passport) {
 
                 // set the user's local credentials 
                 newUser.local.email = email
-                newUser.local.passport = newUser.generateHash(password);
+                newUser.local.password = newUser.generateHash(password);
 
                 // save the user
                 newUser.save(function(err) {
@@ -110,12 +110,10 @@ module.exports = function(passport) {
 
             // if no user is found, return the message
             if (!user)
-
                 // req.flash is the way to set flashdata using connect-flash
                 return done(null, false, req.flash('loginMessage', 'No user found.'));
             
             if (!user.validPassword(password))
-
                 // create the loginMessage and save it to session as flashdata
                 return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
 
