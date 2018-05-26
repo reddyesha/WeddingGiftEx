@@ -23,7 +23,7 @@ module.exports = function(passport) {
 
     // used to deserialize the user
     passport.deserializeUser(function(id, done) {
-        User.findByID(id, function(err, user) {
+        User.findById(id, function(err, user) {
             done(err, user);
         });
     });
@@ -82,4 +82,49 @@ module.exports = function(passport) {
 
         });
     }));
+
+    // =========================================================================
+    // LOCAL LOGIN =============================================================
+    // =========================================================================
+    // we are using named strategies since we have one for login and one for signup
+    // by default, if there was no name, it would just be called 'local'
+
+    passport.use('local-login', new LocalStrategy({
+        //// by default, local strategy uses username and password, we will override with email
+        usernameField : 'email',
+        
+        passwordField : 'password',
+
+        passReqToCallback : true // allows us to pass back the entire request to the callback
+
+    },
+    
+    function(req, email, password, done) { //callback with email and password from out form
+
+        // find a user whose email is the same as the forms email
+        // we are checking to see if the user trying to login already exists
+        User.findOne({ 'local.email' : email }, function(err, user) {
+            // if there's an error we want it to pop first
+            if (err)
+                return done(err);
+
+            // if no user is found, return the message
+            if (!user)
+
+                // req.flash is the way to set flashdata using connect-flash
+                return done(null, false, req.flash('loginMessage', 'No user found.'));
+            
+            if (!user.validPassword(password))
+
+                // create the loginMessage and save it to session as flashdata
+                return done(null, false, req.flash('loginMessage', 'Oops! Wrong password.'));
+
+            return done(null, user);
+        });
+
+    }));
+
+
+
 };
+

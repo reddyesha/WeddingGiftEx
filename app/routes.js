@@ -19,7 +19,11 @@ module.exports = function(app, passport) {
     });
     
     // process the login form
-    // app.post('/login', do all our passport stuff here);
+    app.post('/login', passport.authenticate('local-login', {
+        successRedirect : '/profile', //redirect to secure profile section
+        failureRedirect : '/signup', //redirect back to signup
+        failureFlash : true // allow flash messages
+    }));
 
     // =====================================
     // SIGNUP ==============================
@@ -37,7 +41,7 @@ module.exports = function(app, passport) {
         successRedirect : '/profile', //redirect to secure profile section
         failureRedirect : '/signup', //redirect back to signup
         failureFlash : true // allow flash messages
-        
+
     }));
 
     // =====================================
