@@ -79,7 +79,11 @@ module.exports = function(passport) {
                 // =================================================
                 // USER AND PASSWORD ARE BUILT IN ARGS SO WE NEED TO DENOTE REQ.BODY FOR ALL OTHER FORM DATA (BIRTHDAY, HEIGHT, FAV COLOR ...)
                 // BECAUSE THAT IS WHERE THE INFORMATION IS BEING STORED IN THE REQUEST 
-                newUser.local.test = req.body.test;
+                newUser.local.firstnamelastname = req.body.firstnamelastname;
+                newUser.local.whereareyoufrom = req.body.whereareyoufrom;
+                newUser.local.relationship = req.body.relationship;
+                newUser.local.giftforex = req.body.giftforex;
+
 
                 // save the user
                 newUser.save(function(err) {

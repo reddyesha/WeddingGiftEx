@@ -1,7 +1,7 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
+    <title>Gift Exchange</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
     <style>
@@ -10,6 +10,11 @@
 </head>
 <body>
 <div class="container">
+
+<!-- ================= -->
+<!-- running Header for navigation -->
+<!-- ================= -->
+<header><% include partials/header.ejs %></header>
 
 <div class="col-sm-6 col-sm-offset-3">
 
@@ -20,19 +25,31 @@
         <div class="alert alert-danger"><%= message %></div>
     <% } %>
 
-    <!-- SIGNUP  FORM -->
+    <!-- LOGIN FORM -->
     <form action="/signup" method="post">
         <div class="form-group">
-            <label>Email</label>
+            <label>Email (Required)</label>
             <input type="text" class="form-control" name="email">
         </div>
         <div class="form-group">
-            <label>Password</label>
+            <label>Password (Required)</label>
             <input type="password" class="form-control" name="password">
         </div>
         <div class="form-group">
-                <label>Test</label>
-                <input type="test" class="form-control" name="test">
+            <label>Name</label>
+            <input type="text" class="form-control" name="firstnamelastname">
+        </div>
+        <div class="form-group">
+                <label>Location</label>
+                <input type="text" class="form-control" name="whereareyoufrom">
+        </div>
+        <div class="form-group">
+                <label>How do you know the Bride or Groom?</label>
+                <input type="text" class="form-control" name="relationship">
+        </div>
+        <div class="form-group">
+                <label>What unique local item are you bringing as a gift to exchange?</label>
+                <input type="text" class="form-control" name="giftforex">
         </div>
         
 

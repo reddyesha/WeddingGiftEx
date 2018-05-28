@@ -1,24 +1,38 @@
 <!doctype html>
 <html>
 <head>
-    <title>Node Authentication</title>
+    <title>Gift Exchange</title>
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.0.2/css/bootstrap.min.css"> <!-- load bootstrap css -->
     <link rel="stylesheet" href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.min.css"> <!-- load fontawesome -->
+</head>
     <style>
-        body        { padding-top:80px; }
+        body { 
+            padding-top:50px;
+            background-color: aquamarine;
+        };
     </style>
 </head>
 <body>
 <div class="container">
 
-        <header>
-                <% include partials/header.ejs %>
-            </header>
+<!-- ================= -->
+<!-- running Header for navigation -->
+<!-- ================= -->
+<header><% include partials/header.ejs %></header>
 
     <div class="jumbotron text-center">
-        <h1><span class="fa fa-lock"></span> Wedding Gift Exchange</h1>
+        <h1><span class="fa fa-gift"></span> Wedding Gift Exchange</h1>
 
-        <p>Text for now.... </p>
+        <p>It is our sincere hope that you will get to know the new
+            members of your family at this wedding. As we are in love 
+            with traveling, we ask that you bring a few small gifts local 
+            to where you are from or where you live, to exchange with members 
+            of the other families in attendance. <br>
+
+            Please don't make the gifts expensive and remember that this is
+            the perfect opportunity to share your culture with people who may 
+            have never heard of Columbus, Ohio, or Hyderabad, Telangana. 
+        </p>
 
         <!-- ==================================================== -->
         <!-- login links moved to floating header -->
