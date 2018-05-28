@@ -37,13 +37,17 @@ module.exports = function(passport) {
 
     passport.use('local-signup', new LocalStrategy({
         // by default, local strategy uses username and password, we will override with email
+                // =================================================
+                // ==================NOTES==========================
+                // =================================================    
+                // RIGHT SIDE 'email' AND 'password' DENOTE THE NAME OF THE INPUT FIELD ON THE SIGNUP.EJS FORM (IN THE SIGNUP FORM)
         usernameField : 'email',
         passwordField : 'password',
         passReqToCallback : true // allows up to pass back the entire request to the callback
     
     },
     function(req, email, password, done) {
-
+        console.log(req.body)
         //asynchronous
         //User.findOne wont fire unless data is sent back
         process.nextTick(function() {
@@ -69,6 +73,13 @@ module.exports = function(passport) {
                 // set the user's local credentials 
                 newUser.local.email = email
                 newUser.local.password = newUser.generateHash(password);
+
+                // =================================================
+                // ==================NOTES==========================
+                // =================================================
+                // USER AND PASSWORD ARE BUILT IN ARGS SO WE NEED TO DENOTE REQ.BODY FOR ALL OTHER FORM DATA (BIRTHDAY, HEIGHT, FAV COLOR ...)
+                // BECAUSE THAT IS WHERE THE INFORMATION IS BEING STORED IN THE REQUEST 
+                newUser.local.test = req.body.test;
 
                 // save the user
                 newUser.save(function(err) {

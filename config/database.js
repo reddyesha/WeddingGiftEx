@@ -1,7 +1,7 @@
-// var mongoose = require('mongoose');
-// var db = mongoose.createConnection('localhost', 'test');
 
-// module.exports = {db};
+// ========================================================
+// Exporting to mLab database
+// ========================================================
 
 module.exports = {
 
