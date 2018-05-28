@@ -1,3 +1,6 @@
+var User = require('./models/user');
+
+
 module.exports = function(app, passport) {
 
     //===================================
@@ -54,6 +57,7 @@ module.exports = function(app, passport) {
             user : req.user // get the user out of session and pass to template
         });
     });
+
 
     // =====================================
     // LOGOUT ==============================
