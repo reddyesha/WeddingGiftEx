@@ -26,7 +26,7 @@
         <!-- LOCAL INFORMATION -->
         <div class="col-sm-6">
             <div class="well">
-                <h3><span class="fa fa-user"></span> Local</h3>
+                <h3><span class="fa fa-user"></span> <%= user.local.firstnamelastname %></h3>
 
                     <p>
                         <!-- <strong>id</strong>: <%= user._id %><br> -->
@@ -44,8 +44,51 @@
         </div>
 
     </div>
+
+    <div class="row">
+
+        <!-- LOCAL INFORMATION -->
+        <div class="col-sm-6">
+            <div class="well">
+                <h3><span class="fa fa-user"></span> Random Match</h3>
+
+                    <p>
+                        <!-- <strong>id</strong>: <%= user._id %><br> -->
+                        <strong>Name</strong>: ''''John test''''<br>
+                        <strong>email</strong>: ''''John@test.com''''<br>
+                        <!-- <strong>password</strong>: <%= user.local.password %><br> -->
+                        <strong>Location</strong>: '''frustration island'''<br>
+                        <strong>Relationship</strong>: '''Know a guy who knows a guy'''<br>
+                        <strong>What is a small gift unique to where you live</strong>: ''bizz-buzz foobars'''<br>
+
+                    </p>                                        
+            </div>
+        </div>
+
+    </div>
+
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script type="text/javascript" src="../app/controller/proCont.js"></script>
+    <!-- <script type="text/javascript" src="../app/controller/proCont.js"></script> -->
+    <script type="text/javascript">
+    $(document).ready(function() {
+        console.log('before the button')
+        $('randomBtn').on('click', function() {
+        console.log('inside the btn')
+        var randomUserGen = 
+            User.count().exec(function (err, count) {
+
+                    // Get a random entry
+                    var random = Math.floor(Math.random() * count)
+                    
+                    // Again query all users but only fetch one offset by our random #
+                    User.findOne().skip(random).exec(
+                        function (err, result) {
+                        console.log(result) 
+                        })
+                    })                 
+    })
+    })
+    </script>
 </div>
 </body>
 </html>
