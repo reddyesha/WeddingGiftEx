@@ -13,6 +13,7 @@ var bodyParser   = require('body-parser');
 var session      = require('express-session');
 
 var configDB = require('./config/database.js');
+const {TEST_DATABASE_URL} = require('./config/database');
 
 //configuration ================================================
 
@@ -40,3 +41,41 @@ require('./app/routes.js')(app, passport);
 // launch ==========================================================
 app.listen(port);
 console.log('Listening on ' + port);
+
+
+
+function runServer(TEST_DATABASE_URL, port) {
+
+    return new Promise((resolve, reject) => {
+      mongoose.connect(TEST_DATABASE_URL, err => {
+        if (err) {
+          return reject(err);
+        }
+        server = app.listen(port, () => {
+          console.log(`Your app is listening on port ${port}`);
+          resolve();
+        })
+          .on('error', err => {
+            mongoose.disconnect();
+            reject(err);
+          });
+      });
+    });
+  }
+  
+  // this function closes the server, and returns a promise. we'll
+  // use it in our integration tests later.
+  function closeServer() {
+    return mongoose.disconnect().then(() => {
+      return new Promise((resolve, reject) => {
+        console.log('Closing server');
+        server.close(err => {
+          if (err) {
+            return reject(err);
+          }
+          resolve();
+        });
+      });
+    });
+  }
+  module.exports = { app, runServer, closeServer };
