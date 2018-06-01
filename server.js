@@ -34,6 +34,8 @@ app.use(passport.initialize());
 app.use(passport.session()); //persistent login sessions
 app.use(flash()); // use connect-flash for flash messaging (like 'psw incorrect')
 
+app.use("/app", express.static(__dirname + "/app"));
+app.use("/bundles", express.static(__dirname + "/bundles"))
 
 // routes ==========================================================
 require('./app/routes.js')(app, passport);
